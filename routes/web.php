@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('login', 'Auth\LoginController@login'); //view to sign user in.
+
+Route::post('login', 'Auth\LoginController@postLogin');
