@@ -1,18 +1,28 @@
 <?php
 namespace App;
 
+use Illuminate\Http\Requests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class AuthenticatesUser
 {
+    use ValidatesRequests;
+
+    protected $requests;
+
+    public function __constructor(Request $request)
+    {
+        $this->request = $request;
+    }
+
     public function invite()
     {
         // Validate the request
-        $this->validateRequest()
+        $this->validateRequest();
         // Create a token
-             ->createToken()
+            //  ->createToken()
         // Send token to user
-             ->send();
+            //  ->send();
     }
 
     protected function validateRequest()
