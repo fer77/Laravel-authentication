@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\AuthenticatesUser;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -13,7 +12,7 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function postLogin(AuthenticateUser $auth)
+    public function postLogin(AuthenticatesUser $auth)
     {
         $auth->invite();
 
