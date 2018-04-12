@@ -7,6 +7,13 @@ use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
+    protected $auth;
+
+    public function __construct(AuthenticatesUser $auth)
+    {
+        $this->auth = $auth;
+    }
+
     public function login()
     {
         return view('login');
@@ -17,5 +24,10 @@ class LoginController extends Controller
         $auth->invite();
 
         return 'Sweet - check your email.';
+    }
+
+    public function authenticate(LoginToken $token)
+    {
+        $this->auth->login($token);
     }
 }

@@ -2,6 +2,7 @@
 namespace App;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class AuthenticatesUser
@@ -25,6 +26,14 @@ class AuthenticatesUser
             //  ->send();
     }
 
+    public function login(LoginToken $token)
+    {
+        // login the user associated to the token
+        Auth::login($token->user);
+        // delete the token
+        $token->delete();
+    }
+
     protected function validateRequest()
     {
         $this->validate($this->request, [
@@ -34,10 +43,10 @@ class AuthenticatesUser
         return $this;
     }
 
-    private function createToken()
+    protected function createToken()
     {
         $user = User::byEmail($this->request->email);
 
-        LoginToken::generateFor($user);
+        LoginToken::generateFor($user); // create a new row in the database.
     }
 }
